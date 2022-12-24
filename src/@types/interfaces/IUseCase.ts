@@ -1,4 +1,4 @@
-import { IUser } from "../../useCases/anyCase (ex. createUser)/IAnyCase";
+import { IUser } from "../../models/IUser";
 
 export interface IUseCase {
     execute(data: IUser): Promise<IUser>;

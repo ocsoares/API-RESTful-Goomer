@@ -1,3 +1,13 @@
+import 'express-async-errors';
+import express, { Request, Response } from "express";
+import cors from "cors";
+import morganMiddleware from "./middleware/morganMiddleware";
+import swaggerUi from 'swagger-ui-express';
+import { swaggerJSON } from "./docs/swagger";
+import { pageNotFound } from "./middleware/errorAPIMiddleware";
+import { errorAPIMiddleware } from './middleware/errorAPIMiddleware';
+import exampleRoute from './routes/exampleRoute';
+
 const app = express();
 
 app.use(express.json());
@@ -17,12 +27,12 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 
 // Padroniza TODAS as Rotas para conter /api/... na URL !! <<
 app.use('/api/',
-    // Rota exportada
+    exampleRoute
 );
 
 app.use(pageNotFound);
 
-// Para Funções ASSÍNCRONAS (async) PRECISA usar a lib 'express-async-errors' !! <<
+// Para Funções ASSÍNCRONAS (async) PRECISA usar a lib 'express-async-errors' AQUI !! <<
 app.use(errorAPIMiddleware);
 
 export { app };

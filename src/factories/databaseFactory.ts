@@ -1,4 +1,4 @@
-import { MongooseODM } from "../config/Database";
+import { MongooseODM } from "../config/database";
 
 // Utilizando no arquivo server !!! <<<
 export const makeMongooseODMFactory = (): MongooseODM => {

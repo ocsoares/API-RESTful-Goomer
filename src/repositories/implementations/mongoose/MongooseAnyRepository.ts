@@ -1,3 +1,4 @@
+import mongoose, { Schema } from "mongoose";
 import { IUser } from "../../../models/IUser";
 import { IAnyRepository } from "../../interfaces/IAnyRepository";
 
@@ -21,7 +22,7 @@ export class MongooseAnyRepository implements IAnyRepository {
 
     async findByUsername(username: string): Promise<IUser> {
 
-        const userAlreadyExists = await this._UserMongooseModel.find({ username });
+        const userAlreadyExists = await this._UserMongooseModel.find({ username }) as unknown as IUser;
 
         return userAlreadyExists;
     }

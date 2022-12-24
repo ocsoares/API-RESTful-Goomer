@@ -10,6 +10,8 @@ export class MongooseODM implements IMongoose {
 
     async connection(): Promise<void> {
         try {
+            mongoose.set('strictQuery', true);
+
             await mongoose.connect(this._atlasURLConnection);
             Logger.info('Conectado com sucesso ao Atlas !');
         }

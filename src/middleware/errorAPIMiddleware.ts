@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ErrorAPIHelper } from '../helpers/errorAPIHelper';
+import { ErrorAPIHelper } from '../helpers/ErrorAPIHelper';
 
 export const pageNotFound = (req: Request, res: Response): Response => {
     return res.status(404).json({
