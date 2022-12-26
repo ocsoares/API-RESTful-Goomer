@@ -1,7 +1,5 @@
-import { makeMongooseODMFactory } from "../factories/databaseFactory";
+import { mongooseODM } from "../factories/databaseFactory";
 
 beforeAll(async () => {
-    const database = makeMongooseODMFactory();
-
-    await database.connection();
+    await mongooseODM.connection();
 });

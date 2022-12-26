@@ -6,7 +6,7 @@ import swaggerUi from 'swagger-ui-express';
 import { swaggerJSON } from "./docs/swagger";
 import { pageNotFound } from "./middleware/errorAPIMiddleware";
 import { errorAPIMiddleware } from './middleware/errorAPIMiddleware';
-import exampleRoute from './routes/exampleRoute';
+import authRoute from './routes/authRoute';
 
 const app = express();
 
@@ -27,7 +27,7 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 
 // Padroniza TODAS as Rotas para conter /api/... na URL !! <<
 app.use('/api/',
-    exampleRoute
+    authRoute
 );
 
 app.use(pageNotFound);

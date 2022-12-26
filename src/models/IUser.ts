@@ -3,6 +3,6 @@
 export interface IUser {
     readonly id?: string; // VER na Prática como colocar esse ID para NÃO dar ERRO !!
     username: string;
-    email: string;
     password: string;
+    confirm_password: string;
 }

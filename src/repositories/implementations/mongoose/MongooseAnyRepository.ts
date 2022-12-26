@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { IUser } from "../../../models/IUser";
-import { IAnyRepository } from "../../interfaces/IAnyRepository";
+import { ICreateUserRepository } from "../../interfaces/ICreateUserRepository";
 
 // IMPORTANTE: Esse arquivo é Responsável pelos Métodos REAIS do Banco de Dados-
 // (Mongoose, no caso) !!! <<<
@@ -13,11 +13,11 @@ import { IAnyRepository } from "../../interfaces/IAnyRepository";
 
 // IMPORTANTE: Quando for CRIAR um NOVO Usuário, depois de criado, PROCURAR pelo ID para ver se 
 // criou mesmo, destruturando o id e checar com if e error !!!
-export class MongooseAnyRepository implements IAnyRepository {
+export class MongooseAnyRepository implements ICreateUserRepository {
     private readonly _UserMongooseModel = mongoose.model('any', new Schema<IUser>({
         username: { type: String, required: true, unique: true },
-        email: { type: String, required: true, unique: true },
-        password: { type: String, required: true }
+        password: { type: String, required: true },
+        confirm_password: { type: String, required: true }
     }));
 
     async findByUsername(username: string): Promise<IUser> {
