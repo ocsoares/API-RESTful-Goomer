@@ -12,8 +12,7 @@ import { IUserRepository } from "../../interfaces/IUserRepository";
 
 const UserMongooseModel = mongoose.model('user', new Schema<IUser>({
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    confirm_password: { type: String, required: true }
+    password: { type: String, required: true }
 },
     {
         timestamps: true
@@ -28,14 +27,9 @@ export class MongooseUserRepository implements IUserRepository {
         return userAlreadyExists;
     }
 
-    // FAZER o Hash de Senha com Bcrypt !!
     async create(data: ICreateUserRequest): Promise<IUser> {
-        if (data.password !== data.confirm_password) {
-            throw new BadRequestAPIError('As senhas não coincidem !');
-        }
-
         const newUser = new UserMongooseModel(data);
-        const saveUser = newUser.save();
+        const saveUser = await newUser.save();
 
         return saveUser;
     }

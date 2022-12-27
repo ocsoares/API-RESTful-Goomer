@@ -2,6 +2,7 @@ import { IUseCase } from "../../@types/interfaces/IUseCase";
 import { BadRequestAPIError } from "../../helpers/ErrorAPIHelper";
 import { IUser } from "../../models/IUser";
 import { IUserRepository } from "../../repositories/interfaces/IUserRepository";
+import { HashPassword } from "../../utils/HashPasswordUtils";
 import { ICreateUserRequest } from "./ICreateUser";
 
 export class CreateUserUseCase implements IUseCase {
@@ -9,7 +10,6 @@ export class CreateUserUseCase implements IUseCase {
         private readonly createUserRepository: IUserRepository  // Repository with database methods
     ) { }
 
-    // ARRUMAR ISSO, fazer do jeito que CRIA e SALVA uma Conta !
     async execute(data: ICreateUserRequest): Promise<IUser> {
         const userAlreadyExists = await this.createUserRepository.findByUsername(data.username);
         console.log('TESTE do CreateUserUseCase', this.createUserRepository);
@@ -18,7 +18,16 @@ export class CreateUserUseCase implements IUseCase {
             throw new BadRequestAPIError('Já existe um usuário registrado com esse username !');
         }
 
-        const newUser = this.createUserRepository.create(data);
+        if (data.password !== data.confirm_password) {
+            throw new BadRequestAPIError('As senhas não coincidem !');
+        }
+
+        const protectedPassword = await HashPassword.execute(data.password);
+
+        const newUser = await this.createUserRepository.create({
+            username: data.username,
+            password: protectedPassword
+        });
 
         return newUser;
     }

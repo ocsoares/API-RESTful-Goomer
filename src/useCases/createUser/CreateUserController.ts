@@ -1,29 +1,20 @@
 import { Request, Response } from 'express';
 import { IController } from '../../@types/interfaces/IController';
-import { IUseCase } from '../../@types/interfaces/IUseCase';
-import { IUser } from '../../models/IUser';
-import { MongooseUserRepository } from '../../repositories/implementations/mongoose/MongooseUserRepository';
 import { CreateUserUseCase } from './CreateUserUseCase';
+import { ICreateUserRequest } from './ICreateUser';
 
 export class CreateUserController implements IController {
     constructor(
-        private readonly createUserUseCase: IUseCase // Case responsible, in this case, for CREATE a new user !!
+        private readonly createUserUseCase: CreateUserUseCase // Case responsible, in this case, for CREATE a new user !!
     ) { }
 
-    // Por algum motivo, o createUserUseCase aqui no Controller NÃO está Instanciando !!!
+    // O createUserUseCase aqui no Controller NÃO instancia se NÃO passar o Request e o Response como
+    // PARÂMETRO no handle (funcionando na Rota) !!! <<<
     async handle(req: Request, res: Response): Promise<Response> {
-        const { username, password, confirm_password }: IUser = req.body;
+        const { username, password, confirm_password }: ICreateUserRequest = req.body;
         console.log('TESTE CreateUserController:', this.createUserUseCase);
 
-        // const onlyTest = new CreateUserUseCase(new MongooseUserRepository);
-
-        // const newUser = await onlyTest.execute({
-        //     username,
-        //     password,
-        //     confirm_password
-        // });
-
-        const newUser = await this.createUserUseCase.execute({
+        const created_account = await this.createUserUseCase.execute({
             username,
             password,
             confirm_password
@@ -31,7 +22,10 @@ export class CreateUserController implements IController {
 
         return res.status(201).json({
             message: 'Conta criada com sucesso !',
-            newUser
+            created_account: {
+                username: created_account.username,
+                password: created_account.password
+            }
         });
     }
 };
