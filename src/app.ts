@@ -14,7 +14,6 @@ app.use(express.json());
 
 app.use(cors());
 
-// Middlewares
 app.use(morganMiddleware);
 
 // Initial route (/) redirect to Documentation Route
@@ -25,14 +24,14 @@ app.get('/', (req: Request, res: Response): void => {
 // Documentation Route
 app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 
-// Padroniza TODAS as Rotas para conter /api/... na URL !! <<
+// All routes use /api as parameter !
 app.use('/api/',
     authRoute
 );
 
 app.use(pageNotFound);
 
-// Para Funções ASSÍNCRONAS (async) PRECISA usar a lib 'express-async-errors' AQUI !! <<
+// HTTP Errors (to use express-async-errors lib !)
 app.use(errorAPIMiddleware);
 
 export { app };

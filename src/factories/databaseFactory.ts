@@ -2,8 +2,8 @@ import { MongooseODM } from "../config/database";
 
 // Utilizando no arquivo server !!! <<<
 const makeMongooseODMFactory = (): MongooseODM => {
-    const atlasDatabase = new MongooseODM();
-    return atlasDatabase;
+    const mongooseODM = new MongooseODM();
+    return mongooseODM;
 };
 
 export const mongooseODM = makeMongooseODMFactory();
