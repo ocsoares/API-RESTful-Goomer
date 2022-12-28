@@ -1,3 +1,4 @@
 export interface IProtectPassword {
-    execute(password: string): Promise<string>;
+    protect(password: string): Promise<string>;
+    comparePassword(password: string, hashedPassword: string): Promise<boolean>;
 }

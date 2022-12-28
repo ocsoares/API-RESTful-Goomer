@@ -22,7 +22,7 @@ export class CreateUserUseCase implements IUseCase {
             throw new BadRequestAPIError('As senhas não coincidem !');
         }
 
-        const protectedPassword = await HashPassword.execute(data.password);
+        const protectedPassword = await HashPassword.protect(data.password);
 
         const newUser = await this.createUserRepository.create({
             username: data.username,
