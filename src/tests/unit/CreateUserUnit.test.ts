@@ -1,7 +1,9 @@
-// Imports
-
+import { testMongooseODM } from "../../factories/databaseFactory";
 import { HashPassword } from "../../utils/HashPasswordUtils";
 
+afterAll(async () => {
+    await testMongooseODM.clearDatabase();
+});
 
 describe('Create User Unit Test', () => {
 

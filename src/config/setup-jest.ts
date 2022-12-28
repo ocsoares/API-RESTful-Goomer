@@ -1,5 +1,5 @@
-import { mongooseODM } from "../factories/databaseFactory";
+import { mongooseODM, testMongooseODM } from "../factories/databaseFactory";
 
 beforeAll(async () => {
-    await mongooseODM.connection();
+    await testMongooseODM.connection();
 });
