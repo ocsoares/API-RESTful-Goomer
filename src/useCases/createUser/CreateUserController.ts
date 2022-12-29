@@ -8,8 +8,6 @@ export class CreateUserController implements IController {
         private readonly createUserUseCase: CreateUserUseCase // Case responsible, in this case, for CREATE a new user !!
     ) { }
 
-    // O createUserUseCase aqui no Controller NÃO instancia se NÃO passar o Request e o Response como
-    // PARÂMETRO no handle (funcionando na Rota) !!! <<<
     async handle(req: Request, res: Response): Promise<Response> {
         const { username, password, confirm_password }: ICreateUserRequest = req.body;
 

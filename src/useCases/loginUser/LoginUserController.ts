@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IController } from "../../@types/interfaces/IController";
-import { IUser } from "../../models/IUser";
 import { Token } from "../../utils/TokenUtils";
+import { ILoginUserRequest } from "./ILoginUser";
 import { LoginUserUseCase } from "./LoginUserUseCase";
 
 export class LoginUserController implements IController {
@@ -10,18 +10,18 @@ export class LoginUserController implements IController {
     ) { }
 
     async handle(req: Request, res: Response): Promise<Response> {
-        const { username, password }: IUser = req.body;
+        const { username, password }: ILoginUserRequest = req.body;
 
         const userLogged = await this.loginUserUseCase.execute({
             username,
             password
         });
 
-        const JWT = Token.generate(userLogged, '1h');
+        const token = Token.generate(userLogged, '1h');
 
         return res.json({
             message: 'Autenticado com sucesso !',
-            token: JWT
+            token
         });
     }
 }

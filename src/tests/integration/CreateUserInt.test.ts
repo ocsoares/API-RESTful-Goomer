@@ -29,8 +29,8 @@ describe("Create User Integration Test", () => {
         );
         const expectBodyMessage: BadRequestErrorMessages = 'Já existe um usuário registrado com esse username !';
 
-        expect(getResponse.body.message).toBe(expectBodyMessage);
         expect(getResponse.statusCode).toBe(400);
+        expect(getResponse.body.message).toBe(expectBodyMessage);
     });
 
     it('Should NOT be possible to create a new user if the passwords are different', async () => {
@@ -42,8 +42,8 @@ describe("Create User Integration Test", () => {
         );
         const expectBodyMessage: BadRequestErrorMessages = 'As senhas não coincidem !';
 
-        expect(getResponse.body.message).toBe(expectBodyMessage);
         expect(getResponse.statusCode).toBe(400);
+        expect(getResponse.body.message).toBe(expectBodyMessage);
     });
 });
 

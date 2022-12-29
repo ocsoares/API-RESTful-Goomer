@@ -4,13 +4,14 @@ import { BadRequestAPIError } from "../../helpers/ErrorAPIHelper";
 import { IUser } from "../../models/IUser";
 import { IUserRepository } from "../../repositories/interfaces/IUserRepository";
 import { ProtectPassword } from "../../utils/ProtectPasswordUtils";
+import { ILoginUserRequest } from "./ILoginUser";
 
 export class LoginUserUseCase implements IUseCase {
     constructor(
         private readonly loginUserRepository: IUserRepository
     ) { }
 
-    async execute(data: IUser): Promise<IUser> {
+    async execute(data: ILoginUserRequest): Promise<IUser> {
         const userAlreadyExists = await this.loginUserRepository.findByUsername(data.username);
 
         if (!userAlreadyExists) {
