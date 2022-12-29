@@ -27,9 +27,12 @@ export default {
     "!./src/@types/**",
     "!./src/app.ts",
     "!./src/server.ts",
-    "!./src/middleware/validation/**",
+    "!./src/middleware/**",
     "!./src/models/**",
-    "!./src/routes/**"
+    "!./src/routes/**",
+    "!./src/docs/**",
+    "!./src/factories/**",
+    "!./src/repositories/interfaces/**",
   ],
 
   // The directory where Jest should output its coverage files

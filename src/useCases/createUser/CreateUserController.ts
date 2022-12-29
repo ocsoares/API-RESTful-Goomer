@@ -12,7 +12,6 @@ export class CreateUserController implements IController {
     // PARÂMETRO no handle (funcionando na Rota) !!! <<<
     async handle(req: Request, res: Response): Promise<Response> {
         const { username, password, confirm_password }: ICreateUserRequest = req.body;
-        console.log('TESTE CreateUserController:', this.createUserUseCase);
 
         const created_account = await this.createUserUseCase.execute({
             username,

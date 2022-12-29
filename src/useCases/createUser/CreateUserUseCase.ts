@@ -12,7 +12,6 @@ export class CreateUserUseCase implements IUseCase {
 
     async execute(data: ICreateUserRequest): Promise<IUser> {
         const userAlreadyExists = await this.createUserRepository.findByUsername(data.username);
-        console.log('TESTE do CreateUserUseCase', this.createUserRepository);
 
         if (userAlreadyExists) {
             throw new BadRequestAPIError('Já existe um usuário registrado com esse username !');
