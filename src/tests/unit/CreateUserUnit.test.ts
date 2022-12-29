@@ -1,5 +1,5 @@
 import { testMongooseODM } from "../../factories/databaseFactory";
-import { HashPassword } from "../../utils/HashPasswordUtils";
+import { HashPassword } from "../../utils/ProtectPasswordUtils";
 
 afterAll(async () => {
     await testMongooseODM.clearDatabase();

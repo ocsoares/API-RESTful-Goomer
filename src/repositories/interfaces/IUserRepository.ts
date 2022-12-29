@@ -4,5 +4,6 @@ import { ICreateUserRequest } from "../../useCases/createUser/ICreateUser";
 // Default methods to use with any Database
 export interface IUserRepository {
     findByUsername(username: string): Promise<IUser>;
-    create(data: IUser): Promise<IUser>;
+    findById(id: string): Promise<IUser>;
+    createUser(data: IUser): Promise<IUser>;
 }

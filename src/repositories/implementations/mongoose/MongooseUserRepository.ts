@@ -21,16 +21,22 @@ const UserMongooseModel = mongoose.model('user', new Schema<IUser>({
 
 export class MongooseUserRepository implements IUserRepository {
     async findByUsername(username: string): Promise<IUser> {
+        const searchUserByUsername = await UserMongooseModel.findOne({ username }) as IUser;
 
-        const userAlreadyExists = await UserMongooseModel.findOne({ username }) as mongoose.Document & IUser;
-
-        return userAlreadyExists;
+        return searchUserByUsername;
     }
 
-    async create(data: ICreateUserRequest): Promise<IUser> {
+    async findById(id: string): Promise<IUser> {
+        const searchUserById = await UserMongooseModel.findById(id) as IUser;
+
+        return searchUserById;
+    }
+
+    async createUser(data: ICreateUserRequest): Promise<IUser> {
         const newUser = new UserMongooseModel(data);
         const saveUser = await newUser.save();
 
         return saveUser;
     }
+
 }

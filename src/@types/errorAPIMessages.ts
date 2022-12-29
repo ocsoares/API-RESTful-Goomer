@@ -8,3 +8,6 @@ export type BadRequestErrorMessages =
 
 export type UnauthorizedErrorMessages =
     'Token inválido ou expirado !';
+
+export type InternalServerErrorMessage =
+    'Ocorreu um erro inesperado no servidor. Tente novamente mais tarde.';

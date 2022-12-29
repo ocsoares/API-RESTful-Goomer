@@ -1,8 +1,8 @@
 import { IUseCase } from "../../@types/interfaces/IUseCase";
-import { BadRequestAPIError } from "../../helpers/ErrorAPIHelper";
+import { BadRequestAPIError, InternalServerErrorAPI } from "../../helpers/ErrorAPIHelper";
 import { IUser } from "../../models/IUser";
 import { IUserRepository } from "../../repositories/interfaces/IUserRepository";
-import { HashPassword } from "../../utils/HashPasswordUtils";
+import { ProtectPassword } from "../../utils/ProtectPasswordUtils";
 import { ICreateUserRequest } from "./ICreateUser";
 
 export class CreateUserUseCase implements IUseCase {
@@ -21,12 +21,22 @@ export class CreateUserUseCase implements IUseCase {
             throw new BadRequestAPIError('As senhas não coincidem !');
         }
 
-        const protectedPassword = await HashPassword.protect(data.password);
+        const protectedPassword = await ProtectPassword.protect(data.password);
 
-        const newUser = await this.createUserRepository.create({
+        const newUser = await this.createUserRepository.createUser({
             username: data.username,
             password: protectedPassword
         });
+
+        if (!newUser.id) {
+            throw new InternalServerErrorAPI('Ocorreu um erro inesperado no servidor. Tente novamente mais tarde.');
+        }
+
+        const userWasCreated = await this.createUserRepository.findById(newUser.id);
+
+        if (!userWasCreated) {
+            throw new InternalServerErrorAPI('Ocorreu um erro inesperado no servidor. Tente novamente mais tarde.');
+        }
 
         return newUser;
     }
