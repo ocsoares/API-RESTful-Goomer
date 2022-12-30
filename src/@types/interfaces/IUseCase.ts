@@ -1,5 +1,4 @@
-import { IUser } from "../../models/IUser";
-
+// object = Type data and promise with a Interface in useCases
 export interface IUseCase {
-    execute(data: IUser): Promise<IUser>;
+    execute(data: object): Promise<object>;
 }

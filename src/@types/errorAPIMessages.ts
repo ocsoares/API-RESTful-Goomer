@@ -4,10 +4,13 @@ export type BadRequestErrorMessages =
     'Já existe um usuário registrado com esse username !' |
     'Username ou password inválido !' |
     'Insira um token válido no authorization !' |
-    'ID de transferência inválido !';
+    'ID de transferência inválido !' |
+    'Já existe um restaurante registrado com esse nome !';
 
 export type UnauthorizedErrorMessages =
     'Token inválido ou expirado !';
 
 export type InternalServerErrorMessage =
-    'Ocorreu um erro inesperado no servidor. Tente novamente mais tarde.';
+    'Ocorreu um erro inesperado no servidor. Tente novamente mais tarde.' |
+    'Não foi possível registrar o usuário. Tente novamente mais tarde.' |
+    'Não foi possível registrar o restaurante. Tente novamente mais tarde.';

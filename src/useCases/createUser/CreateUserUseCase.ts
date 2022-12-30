@@ -29,13 +29,13 @@ export class CreateUserUseCase implements IUseCase {
         });
 
         if (!newUser.id) {
-            throw new InternalServerErrorAPI('Ocorreu um erro inesperado no servidor. Tente novamente mais tarde.');
+            throw new InternalServerErrorAPI('Não foi possível registrar o usuário. Tente novamente mais tarde.');
         }
 
         const userWasCreated = await this.createUserRepository.findById(newUser.id);
 
         if (!userWasCreated) {
-            throw new InternalServerErrorAPI('Ocorreu um erro inesperado no servidor. Tente novamente mais tarde.');
+            throw new InternalServerErrorAPI('Não foi possível registrar o usuário. Tente novamente mais tarde.');
         }
 
         return newUser;
