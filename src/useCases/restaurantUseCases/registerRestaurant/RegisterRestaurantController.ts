@@ -9,10 +9,10 @@ export class RegisterRestaurantController implements IController {
     ) { }
 
     async handle(req: Request, res: Response): Promise<Response> {
-        const { photo, name, address, business_hours }: IRegisterRestaurantRequest = req.body;
+        const { photo_url, name, address, business_hours }: IRegisterRestaurantRequest = req.body;
 
         const created_restaurant = await this.registerRestaurantUseCase.execute({
-            photo,
+            photo_url,
             name,
             address,
             business_hours
@@ -21,7 +21,7 @@ export class RegisterRestaurantController implements IController {
         return res.status(201).json({
             message: 'Restaurante criado com sucesso !',
             created_restaurant: {
-                photo: created_restaurant.photo ? created_restaurant.photo : '-',
+                photo_url: created_restaurant.photo_url ? created_restaurant.photo_url : '-',
                 name: created_restaurant.name,
                 address: created_restaurant.address,
                 business_hours: created_restaurant.business_hours

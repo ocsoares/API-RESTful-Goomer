@@ -4,7 +4,7 @@ import { IRegisterRestaurantRequest } from "../../../useCases/restaurantUseCases
 import { IRestaurantRepository } from "../../interfaces/IRestaurantRepository";
 
 const RestaurantMongooseModel = mongoose.model('restaurant', new Schema<IRestaurant>({
-    photo: { type: String },
+    photo_url: { type: String },
     name: { type: String, required: true, unique: true },
     address: { type: String, required: true },
     business_hours: { type: String, required: true }
@@ -27,7 +27,6 @@ export class MongooseRestaurantRepository implements IRestaurantRepository {
     }
     async createRestaurant(data: IRegisterRestaurantRequest): Promise<IRestaurant> {
         const newRestaurant = new RestaurantMongooseModel(data);
-        const saveRestaurant = await newRestaurant.save();
 
         return newRestaurant;
     }

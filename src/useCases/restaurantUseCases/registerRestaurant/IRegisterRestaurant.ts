@@ -1,5 +1,5 @@
 export interface IRegisterRestaurantRequest {
-    photo?: string;
+    photo_url?: string;
     name: string;
     address: string;
     business_hours: string;
