@@ -1,5 +1,5 @@
 export interface IRestaurant {
-    readonly id: string;
+    readonly id?: string;
     photo?: string;
     name: string;
     address: string;

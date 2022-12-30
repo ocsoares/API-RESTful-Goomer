@@ -18,10 +18,18 @@ export class RegisterRestaurantUseCase implements IUseCase {
 
         const newRestaurant = await this.registerRestaurantRepository.createRestaurant(data);
 
+        if (!newRestaurant.id) {
+            throw new InternalServerErrorAPI(
+                'Não foi possível registrar o restaurante. Tente novamente mais tarde.'
+            );
+        }
+
         const restaurantWasCreated = await this.registerRestaurantRepository.findById(newRestaurant.id);
 
         if (!restaurantWasCreated) {
-            throw new InternalServerErrorAPI('Não foi possível registrar o restaurante. Tente novamente mais tarde.');
+            throw new InternalServerErrorAPI(
+                'Não foi possível registrar o restaurante. Tente novamente mais tarde.'
+            );
         }
 
         return newRestaurant;

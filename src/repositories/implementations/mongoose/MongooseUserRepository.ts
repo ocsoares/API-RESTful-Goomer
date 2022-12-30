@@ -4,12 +4,6 @@ import { IUser } from "../../../models/IUser";
 import { ICreateUserRequest } from "../../../useCases/createUser/ICreateUser";
 import { IUserRepository } from "../../interfaces/IUserRepository";
 
-// IMPORTANTE, se, por exemplo, esse Repositório for sobre Usuários, Fazer TODOS os Métodos rela-
-// -cionado, por exemplo, create, delete, find um usuário, etc... !!! <<< 
-
-// IMPORTANTE: Quando for CRIAR um NOVO Usuário, depois de criado, PROCURAR pelo ID para ver se 
-// criou mesmo, destruturando o id e checar com if e error !!!
-
 const UserMongooseModel = mongoose.model('user', new Schema<IUser>({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true }
@@ -34,9 +28,9 @@ export class MongooseUserRepository implements IUserRepository {
 
     async createUser(data: ICreateUserRequest): Promise<IUser> {
         const newUser = new UserMongooseModel(data);
-        const saveUser = await newUser.save();
+        await newUser.save();
 
-        return saveUser;
+        return newUser;
     }
 
 }

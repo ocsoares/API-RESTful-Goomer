@@ -7,6 +7,7 @@ import { swaggerJSON } from "./docs/swagger";
 import { pageNotFound } from "./middleware/errorAPIMiddleware";
 import { errorAPIMiddleware } from './middleware/errorAPIMiddleware';
 import authRoute from './routes/authRoute';
+import restaurantRoute from './routes/restaurantRoute';
 
 const app = express();
 
@@ -26,7 +27,8 @@ app.use('/api/docs', swaggerUi.serve, swaggerUi.setup(swaggerJSON));
 
 // All routes use /api as parameter !
 app.use('/api/',
-    authRoute
+    authRoute,
+    restaurantRoute
 );
 
 app.use(pageNotFound);
