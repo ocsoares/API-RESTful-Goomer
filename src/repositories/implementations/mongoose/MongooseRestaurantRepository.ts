@@ -27,8 +27,8 @@ export class MongooseRestaurantRepository implements IRestaurantRepository {
     }
     async createRestaurant(data: IRegisterRestaurantRequest): Promise<IRestaurant> {
         const newRestaurant = new RestaurantMongooseModel(data);
+        await newRestaurant.save();
 
         return newRestaurant;
     }
-
 }

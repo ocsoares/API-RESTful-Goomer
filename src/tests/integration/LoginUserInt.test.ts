@@ -3,11 +3,10 @@ import { BadRequestErrorMessages } from '../../@types/errorAPIMessages';
 import { app } from '../../app';
 import { ILoginUserRequest } from '../../useCases/loginUser/ILoginUser';
 
-const loginUserURLRoute = '/api/auth/login';
-const TEST_USERNAME = 'test_user';
-const TEST_PASSWORD = 'test_password123';
-
 describe('Login User Integration Test', () => {
+    const loginUserURLRoute = '/api/auth/login';
+    const TEST_USERNAME = 'test_user';
+    const TEST_PASSWORD = 'test_password123';
 
     // User already created in CreateUser Integration Test !
     it('Should be possible to login with a valid user', async () => {
