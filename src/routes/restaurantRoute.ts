@@ -1,4 +1,5 @@
 import { Request, Response, Router } from "express";
+import { getAllRestaurantsController } from "../factories/useCases/getAllRestaurantsFactory";
 import { registerRestaurantController } from "../factories/useCases/registerRestaurantFactory";
 import { authMiddleware } from "../middleware/authMiddleware";
 import { handleValidation } from "../middleware/validation/handleValidation";
@@ -12,7 +13,7 @@ restaurantRoute.post('/restaurant', authMiddleware, registerRestaurantValidation
     });
 
 restaurantRoute.get('/restaurant', authMiddleware, async (req: Request, res: Response) => {
-
+    getAllRestaurantsController.handle(req, res);
 });
 
 export default restaurantRoute;
