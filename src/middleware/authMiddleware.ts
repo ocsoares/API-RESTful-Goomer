@@ -6,7 +6,6 @@ interface IAuth {
     authorization: string;
 }
 
-// COLOCAR nas Rotas necessárias (n coloquei ainda) !!
 export const authMiddleware = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     const { authorization }: IAuth = req.headers as any;
 

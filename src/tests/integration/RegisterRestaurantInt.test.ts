@@ -6,7 +6,14 @@ import { IRegisterRestaurantRequest } from '../../useCases/restaurantUseCases/re
 import { Token } from '../../utils/TokenUtils';
 
 describe('Register Restaurant Integration Test', () => {
+    const userData: IUser = {
+        id: 'any_id',
+        username: 'any_username',
+        password: 'any_password'
+    };
+
     const registerRestaurantURLRoute = '/api/restaurant';
+    const TEST_TOKEN = getTokenWithTestUser(userData);
     const TEST_NAME = 'any_name';
     const TEST_ADDRESS = 'test_address';
     const TEST_BUSINESS_HOURS = 'any_business_hours';
@@ -14,6 +21,7 @@ describe('Register Restaurant Integration Test', () => {
     it('Should be possible to register a new restaurant', async () => {
         const getResponse = await registerRestaurantPostRoute(
             registerRestaurantURLRoute,
+            TEST_TOKEN,
             TEST_NAME,
             TEST_ADDRESS,
             TEST_BUSINESS_HOURS
@@ -22,9 +30,22 @@ describe('Register Restaurant Integration Test', () => {
         expect(getResponse.statusCode).toBe(201);
     });
 
+    it('Should NOT be possible to register a new restaurant if auth token is wrong', async () => {
+        const getResponse = await registerRestaurantPostRoute(
+            registerRestaurantURLRoute,
+            'wrong_token',
+            'other_name',
+            TEST_ADDRESS,
+            TEST_BUSINESS_HOURS
+        );
+
+        expect(getResponse.statusCode).toBe(401);
+    });
+
     it('Should NOT be possible to register a new restaurant if name already exists', async () => {
         const getResponse = await registerRestaurantPostRoute(
             registerRestaurantURLRoute,
+            TEST_TOKEN,
             TEST_NAME,
             'other_address',
             'other_business_hours',
@@ -39,19 +60,15 @@ describe('Register Restaurant Integration Test', () => {
 
 async function registerRestaurantPostRoute(
     urlRoute: string,
+    token: string,
     name: string,
     address: string,
     business_hours: string,
     photo_url?: string,
 ): Promise<request.Response> {
-    const userData: IUser = {
-        id: 'any_id',
-        username: 'any_username',
-        password: 'any_password'
-    };
 
     const getResponse = await request(app).post(urlRoute)
-        .set('Authorization', `Bearer ${getTokenWithTestUser(userData)}`)
+        .set('Authorization', `Bearer ${token}`)
         .send(<IRegisterRestaurantRequest>{
             name,
             address,
