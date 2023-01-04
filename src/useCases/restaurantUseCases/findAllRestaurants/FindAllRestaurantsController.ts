@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
 import { IController } from "../../../@types/interfaces/IController";
-import { GetAllRestaurantsUseCase } from "./getAllRestaurantsUseCase";
+import { FindAllRestaurantsUseCase } from "./FindAllRestaurantsUseCase";
 
-export class GetAllRestaurantsController implements IController {
+export class FindAllRestaurantsController implements IController {
     constructor(
-        private readonly getAllRestaurantsUseCase: GetAllRestaurantsUseCase
+        private readonly getAllRestaurantsUseCase: FindAllRestaurantsUseCase
     ) { }
 
     async handle(req: Request, res: Response): Promise<Response> {

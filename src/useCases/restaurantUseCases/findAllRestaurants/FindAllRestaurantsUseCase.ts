@@ -1,7 +1,7 @@
 import { IUseCase } from "../../../@types/interfaces/IUseCase";
 import { IRestaurantRepository } from "../../../repositories/interfaces/IRestaurantRepository";
 
-export class GetAllRestaurantsUseCase implements IUseCase {
+export class FindAllRestaurantsUseCase implements IUseCase {
     constructor(
         private readonly getAllRestaurantsRepository: IRestaurantRepository
     ) { }
