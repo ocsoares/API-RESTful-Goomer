@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { BadRequestAPIError } from "../../../helpers/ErrorAPIHelper";
 import { IUser } from "../../../models/IUser";
 import { ICreateUserRequest } from "../../../useCases/createUser/ICreateUser";
 import { IUserRepository } from "../../interfaces/IUserRepository";
