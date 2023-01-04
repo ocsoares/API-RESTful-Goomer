@@ -5,7 +5,7 @@ import { ICreateUserRequest } from './ICreateUser';
 
 export class CreateUserController implements IController {
     constructor(
-        private readonly createUserUseCase: CreateUserUseCase // Case responsible, in this case, for CREATE a new user !!
+        private readonly createUserUseCase: CreateUserUseCase
     ) { }
 
     async handle(req: Request, res: Response): Promise<Response> {
