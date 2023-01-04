@@ -1,4 +1,4 @@
-import { BadRequestErrorMessages, InternalServerErrorMessage } from "../@types/errorAPIMessages";
+import { BadRequestErrorMessages, InternalServerErrorMessage, UnauthorizedErrorMessages } from "../@types/errorAPIMessages";
 
 export class ErrorAPIHelper extends Error {
     public readonly statusCode: number;
@@ -26,5 +26,13 @@ export class InternalServerErrorAPI extends ErrorAPIHelper {
         super(message, 500);
 
         this.name = 'InternalServerError';
+    }
+}
+
+export class UnauthorizedAPIError extends ErrorAPIHelper {
+    constructor(message: UnauthorizedErrorMessages) {
+        super(message, 401);
+
+        this.name = 'Unauthorized';
     }
 }

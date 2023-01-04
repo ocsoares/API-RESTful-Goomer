@@ -5,6 +5,11 @@ import { IUser } from "../models/IUser";
 import jwt from 'jsonwebtoken';
 import { BadRequestAPIError } from '../helpers/ErrorAPIHelper';
 
+export interface ITokenReturn {
+    id: string;
+    username: string;
+}
+
 @staticInterfaceMethods<IToken>()
 export class Token {
     static generate(user: IUser, expiresIn: string): string {
@@ -12,7 +17,7 @@ export class Token {
             throw new BadRequestAPIError('Username ou password inválido !');
         }
 
-        const JWT = jwt.sign(<IUser>{
+        const JWT = jwt.sign(<ITokenReturn>{
             id: user.id,
             username: user.username
         }, "" + process.env.JWT_HASH as string, {
@@ -20,5 +25,17 @@ export class Token {
         });
 
         return JWT;
+    }
+
+    // VER como é o Retorno disso, pra ver se precisa desse ITokenReturn !! 
+    static verify(token: string): ITokenReturn | false {
+        try {
+            const isValidToken = jwt.verify(token, process.env.JWT_HASH as string) as ITokenReturn;
+
+            return isValidToken;
+        }
+        catch (error: any) {
+            return false;
+        }
     }
 }

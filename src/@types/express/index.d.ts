@@ -1,5 +1,8 @@
 declare namespace Express {
     interface Request {
-        teste: any;
+        token: {
+            id: string;
+            username: string;
+        };
     }
 }

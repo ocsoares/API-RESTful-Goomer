@@ -1,4 +1,5 @@
 import { IUser } from "../../models/IUser";
+import { ITokenReturn } from "../../utils/TokenUtils";
 
 export interface IProtectPassword {
     protect(password: string): Promise<string>;
@@ -7,4 +8,5 @@ export interface IProtectPassword {
 
 export interface IToken {
     generate(user: IUser, expiresIn: string): string;
+    verify(token: string): ITokenReturn | false;
 }
