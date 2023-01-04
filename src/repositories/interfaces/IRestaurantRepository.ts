@@ -8,6 +8,7 @@ export interface IRestaurantRepository {
     findByName(restaurantName: string): Promise<IRestaurant>;
     findById(id: string): Promise<IRestaurant>;
     createRestaurant(data: IRegisterRestaurantRequest): Promise<IRestaurant>;
+    findAllRestaurants(): Promise<Array<IRestaurant>>;
 }
 
 export interface IRestaurantProducts {

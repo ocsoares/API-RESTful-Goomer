@@ -31,4 +31,11 @@ export class MongooseRestaurantRepository implements IRestaurantRepository {
 
         return newRestaurant;
     }
+
+    // ARRUMAR isso, para devolver as Inf. PRINCIPAIS !!!
+    async findAllRestaurants(): Promise<IRestaurant[]> {
+        const searchAllRestaurants = await RestaurantMongooseModel.find();
+
+        return searchAllRestaurants;
+    }
 }
