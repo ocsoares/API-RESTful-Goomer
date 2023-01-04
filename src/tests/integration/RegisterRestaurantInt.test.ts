@@ -1,7 +1,9 @@
 import request from 'supertest';
 import { BadRequestErrorMessages } from '../../@types/errorAPIMessages';
 import { app } from '../../app';
+import { IUser } from '../../models/IUser';
 import { IRegisterRestaurantRequest } from '../../useCases/restaurantUseCases/registerRestaurant/IRegisterRestaurant';
+import { Token } from '../../utils/TokenUtils';
 
 describe('Register Restaurant Integration Test', () => {
     const registerRestaurantURLRoute = '/api/restaurant';
@@ -42,12 +44,26 @@ async function registerRestaurantPostRoute(
     business_hours: string,
     photo_url?: string,
 ): Promise<request.Response> {
-    const getResponse = await request(app).post(urlRoute).send(<IRegisterRestaurantRequest>{
-        name,
-        address,
-        business_hours,
-        photo_url
-    });
+    const userData: IUser = {
+        id: 'any_id',
+        username: 'any_username',
+        password: 'any_password'
+    };
+
+    const getResponse = await request(app).post(urlRoute)
+        .set('Authorization', `Bearer ${getTokenWithTestUser(userData)}`)
+        .send(<IRegisterRestaurantRequest>{
+            name,
+            address,
+            business_hours,
+            photo_url
+        });
 
     return getResponse;
+}
+
+function getTokenWithTestUser(data: IUser) {
+    const generateToken = Token.generate(data, '1h');
+
+    return generateToken;
 }

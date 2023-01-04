@@ -27,7 +27,6 @@ export class Token {
         return JWT;
     }
 
-    // VER como é o Retorno disso, pra ver se precisa desse ITokenReturn !! 
     static verify(token: string): ITokenReturn | false {
         try {
             const isValidToken = jwt.verify(token, process.env.JWT_HASH as string) as ITokenReturn;
