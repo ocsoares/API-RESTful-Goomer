@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { IController } from "../../../@types/interfaces/IController";
-import { IListDataRestaurantURLParameter } from "./IListDataRestaurant";
-import { ListDataRestaurantUseCase } from "./ListDataRestaurantUseCase";
+import { IFindRestaurantURLParameter } from "./IFindARestaurant";
+import { ListDataRestaurantUseCase } from "./FindARestaurantUseCase";
 
 export class ListDataRestaurantController implements IController {
     constructor(
@@ -9,7 +9,7 @@ export class ListDataRestaurantController implements IController {
     ) { }
 
     async handle(req: Request, res: Response): Promise<Response> {
-        const { id }: IListDataRestaurantURLParameter = req.params as any;
+        const { id }: IFindRestaurantURLParameter = req.params as any;
 
         const listDataRestaurant = await this.listDataRestaurantUseCase.execute(id);
 
