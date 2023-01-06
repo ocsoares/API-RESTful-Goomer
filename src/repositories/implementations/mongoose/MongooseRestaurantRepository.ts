@@ -52,20 +52,22 @@ export class MongooseRestaurantRepository implements IRestaurantRepository {
         return mainInformationOfAllRestaurants;
     }
 
-    async updateRestaurantData(
+    async updateRestaurant(
         restaurantId: string,
         name: string,
         address: string,
         business_hours: string,
         photo_url: string
     ): Promise<IRestaurant> {
-        const updateRestaurantData = await RestaurantMongooseModel.findByIdAndUpdate(restaurantId, <Omit<IRestaurant, 'id'>>{
-            name,
-            address,
-            business_hours,
-            photo_url
-        }) as IRestaurant;
+        const searchRestaurant = await RestaurantMongooseModel.findById(restaurantId);
 
-        return updateRestaurantData;
+        const updatedRestaurant = await searchRestaurant!.updateOne(<IRestaurant>{
+            name: name ? name : searchRestaurant!.name,
+            address: address ? address : searchRestaurant!.address,
+            business_hours: business_hours ? business_hours : searchRestaurant!.business_hours,
+            photo_url: photo_url ? photo_url : searchRestaurant!.photo_url
+        });
+
+        return updatedRestaurant;
     }
 }

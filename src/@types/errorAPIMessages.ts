@@ -6,7 +6,8 @@ export type BadRequestErrorMessages =
     'Insira um token válido no authorization !' |
     'ID de transferência inválido !' |
     'Já existe um restaurante registrado com esse nome !' |
-    'Restaurante não encontrado !';
+    'Restaurante não encontrado !' |
+    'Insira algum dado para alterar no restaurante !';
 
 export type UnauthorizedErrorMessages =
     'Token inválido ou expirado !';

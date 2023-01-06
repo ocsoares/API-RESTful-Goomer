@@ -10,7 +10,7 @@ export interface IRestaurantRepository {
     createRestaurant(data: IRegisterRestaurantRequest): Promise<IRestaurant>;
     findAllRestaurants(): Promise<Array<IRestaurant>>;
 
-    updateRestaurantData(restaurantId: string, name: string, address: string,
+    updateRestaurant(restaurantId: string, name: string, address: string,
         business_hours: string, photo_url: string): Promise<IRestaurant>;
 }
 
