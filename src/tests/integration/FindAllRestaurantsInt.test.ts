@@ -1,17 +1,11 @@
 import request from 'supertest';
 import { app } from '../../app';
-import { IUser } from '../../models/IUser';
-import { Token } from '../../utils/TokenUtils';
+import { getTokenWithTestUser } from '../../utils/testUtilts';
 
 describe('Find all restaurants Integration Test', () => {
-    const userData: IUser = {
-        id: 'any_id',
-        username: 'any_username',
-        password: 'any_password'
-    };
 
     const findAllRestaurantsURLRoute = '/api/restaurant';
-    const TEST_TOKEN = getTokenWithTestUser(userData);
+    const TEST_TOKEN = getTokenWithTestUser();
 
     it('Should be possible to find all restaurants', async () => {
         const getResponse = await findAllRestaurantsGetRoute(
@@ -40,10 +34,4 @@ async function findAllRestaurantsGetRoute(
         .set('Authorization', `Bearer ${token}`);
 
     return getResponse;
-}
-
-function getTokenWithTestUser(data: IUser) {
-    const generateToken = Token.generate(data, '1h');
-
-    return generateToken;
 }

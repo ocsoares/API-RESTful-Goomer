@@ -1,19 +1,13 @@
 import request from 'supertest';
 import { BadRequestErrorMessages } from '../../@types/errorAPIMessages';
 import { app } from '../../app';
-import { IUser } from '../../models/IUser';
 import { IRegisterRestaurantRequest } from '../../useCases/restaurantUseCases/registerRestaurant/IRegisterRestaurant';
-import { Token } from '../../utils/TokenUtils';
+import { getTokenWithTestUser } from '../../utils/testUtilts';
 
 describe('Register Restaurant Integration Test', () => {
-    const userData: IUser = {
-        id: 'any_id',
-        username: 'any_username',
-        password: 'any_password'
-    };
 
     const registerRestaurantURLRoute = '/api/restaurant';
-    const TEST_TOKEN = getTokenWithTestUser(userData);
+    const TEST_TOKEN = getTokenWithTestUser();
     const TEST_NAME = 'any_name';
     const TEST_ADDRESS = 'test_address';
     const TEST_BUSINESS_HOURS = 'any_business_hours';
@@ -77,10 +71,4 @@ async function registerRestaurantPostRoute(
         });
 
     return getResponse;
-}
-
-function getTokenWithTestUser(data: IUser) {
-    const generateToken = Token.generate(data, '1h');
-
-    return generateToken;
 }
