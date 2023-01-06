@@ -1,3 +1,3 @@
-export interface IFindRestaurantURLParameter {
+export interface IFindARestaurantURLParameter {
     id: string;
 }
