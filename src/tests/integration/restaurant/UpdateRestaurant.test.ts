@@ -1,8 +1,8 @@
 import request from 'supertest';
-import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../@types/errorAPIMessages';
-import { app } from '../../app';
-import { IUpdateRestaurantRequest } from '../../useCases/restaurantUseCases/updateRestaurant/IUpdateRestaurant';
-import { getTokenWithTestUser } from '../../utils/testUtilts';
+import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../../@types/errorAPIMessages';
+import { app } from '../../../app';
+import { IUpdateRestaurantRequest } from '../../../useCases/restaurantUseCases/updateRestaurant/IUpdateRestaurant';
+import { getTokenWithTestUser } from '../../../utils/testUtilts';
 
 describe('Update restaurant Integration Test', () => {
     const updateRestaurantURLRoute = '/api/restaurant/invalid_restaurant';

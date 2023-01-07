@@ -1,7 +1,7 @@
 import request from 'supertest';
-import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../@types/errorAPIMessages';
-import { app } from '../../app';
-import { getTokenWithTestUser } from '../../utils/testUtilts';
+import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../../@types/errorAPIMessages';
+import { app } from '../../../app';
+import { getTokenWithTestUser } from '../../../utils/testUtilts';
 
 describe('Find a restaurant Integration Test', () => {
     const findARestaurantURLRoute = `/api/restaurant/`;

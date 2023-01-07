@@ -1,8 +1,8 @@
 import request from 'supertest';
-import { BadRequestErrorMessages } from '../../@types/errorAPIMessages';
-import { app } from '../../app';
-import { IRegisterRestaurantRequest } from '../../useCases/restaurantUseCases/registerRestaurant/IRegisterRestaurant';
-import { getTokenWithTestUser } from '../../utils/testUtilts';
+import { BadRequestErrorMessages } from '../../../@types/errorAPIMessages';
+import { app } from '../../../app';
+import { IRegisterRestaurantRequest } from '../../../useCases/restaurantUseCases/registerRestaurant/IRegisterRestaurant';
+import { getTokenWithTestUser } from '../../../utils/testUtilts';
 
 describe('Register Restaurant Integration Test', () => {
 

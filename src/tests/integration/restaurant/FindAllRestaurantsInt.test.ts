@@ -1,6 +1,6 @@
 import request from 'supertest';
-import { app } from '../../app';
-import { getTokenWithTestUser } from '../../utils/testUtilts';
+import { app } from '../../../app';
+import { getTokenWithTestUser } from '../../../utils/testUtilts';
 
 describe('Find all restaurants Integration Test', () => {
 
