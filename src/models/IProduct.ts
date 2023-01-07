@@ -4,9 +4,7 @@ export interface IProduct {
     readonly name: string;
     readonly price: number;
     readonly category: string;
-    readonly onSale: {
-        description: string,
-        newPrice: number,
-        day_and_hour: string;
-    };
+    readonly description_onsale: string,
+    readonly new_price_onsale: number,
+    readonly day_and_hour_onsale: string;
 }
