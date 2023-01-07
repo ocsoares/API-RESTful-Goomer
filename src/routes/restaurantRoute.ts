@@ -1,9 +1,9 @@
 import { Request, Response, Router } from "express";
-import { deleteRestaurantController } from "../factories/useCases/deleteRestaurantFactory";
-import { findAllRestaurantsController } from "../factories/useCases/findAllRestaurantsFactory";
-import { findARestaurantController } from "../factories/useCases/findDataRestaurantFactory";
-import { registerRestaurantController } from "../factories/useCases/registerRestaurantFactory";
-import { updateRestaurantController } from "../factories/useCases/updateRestaurantFactory";
+import { deleteRestaurantController } from "../factories/useCases/restaurantUseCases/deleteRestaurantFactory";
+import { findAllRestaurantsController } from "../factories/useCases/restaurantUseCases/findAllRestaurantsFactory";
+import { findARestaurantController } from "../factories/useCases/restaurantUseCases/findARestaurantFactory";
+import { registerRestaurantController } from "../factories/useCases/restaurantUseCases/registerRestaurantFactory";
+import { updateRestaurantController } from "../factories/useCases/restaurantUseCases/updateRestaurantFactory";
 import { authMiddleware } from "../middleware/authMiddleware";
 import { handleValidation } from "../middleware/validation/handleValidation";
 import { registerRestaurantValidation } from "../middleware/validation/registerRestaurantValidation";

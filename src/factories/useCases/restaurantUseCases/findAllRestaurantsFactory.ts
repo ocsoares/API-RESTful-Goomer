@@ -1,6 +1,6 @@
-import { MongooseRestaurantRepository } from "../../repositories/implementations/mongoose/MongooseRestaurantRepository";
-import { FindAllRestaurantsController } from "../../useCases/restaurantUseCases/findAllRestaurants/FindAllRestaurantsController";
-import { FindAllRestaurantsUseCase } from "../../useCases/restaurantUseCases/findAllRestaurants/FindAllRestaurantsUseCase";
+import { MongooseRestaurantRepository } from "../../../repositories/implementations/mongoose/MongooseRestaurantRepository";
+import { FindAllRestaurantsController } from "../../../useCases/restaurantUseCases/findAllRestaurants/FindAllRestaurantsController";
+import { FindAllRestaurantsUseCase } from "../../../useCases/restaurantUseCases/findAllRestaurants/FindAllRestaurantsUseCase";
 
 const makeGetAllRestaurantsFactory = (): FindAllRestaurantsController => {
     const mongooseRestaurantRepository = new MongooseRestaurantRepository();

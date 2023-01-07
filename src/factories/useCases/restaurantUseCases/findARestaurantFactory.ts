@@ -1,6 +1,6 @@
-import { MongooseRestaurantRepository } from "../../repositories/implementations/mongoose/MongooseRestaurantRepository";
-import { FindARestaurantController } from "../../useCases/restaurantUseCases/findARestaurant/FindARestaurantController";
-import { FindARestaurantUseCase } from "../../useCases/restaurantUseCases/findARestaurant/FindARestaurantUseCase";
+import { MongooseRestaurantRepository } from "../../../repositories/implementations/mongoose/MongooseRestaurantRepository";
+import { FindARestaurantController } from "../../../useCases/restaurantUseCases/findARestaurant/FindARestaurantController";
+import { FindARestaurantUseCase } from "../../../useCases/restaurantUseCases/findARestaurant/FindARestaurantUseCase";
 
 const makeListDataRestaurantFactory = (): FindARestaurantController => {
     const mongooseRestaurantRepository = new MongooseRestaurantRepository();
