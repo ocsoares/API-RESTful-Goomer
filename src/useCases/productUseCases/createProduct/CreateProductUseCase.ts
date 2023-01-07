@@ -23,6 +23,7 @@ export class CreateProductUseCase implements IUseCase {
             throw new InternalServerErrorAPI('Não foi possível registrar o produto. Tente novamente mais tarde.');
         }
 
+        // Could not to use spread because mongoose fails !! <<
         const mainInformationOfAllProducts: ICreateProductRequest = {
             photo_url: newProduct.photo_url,
             name: newProduct.name,
