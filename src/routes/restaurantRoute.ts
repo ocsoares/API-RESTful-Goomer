@@ -1,4 +1,5 @@
 import { Request, Response, Router } from "express";
+import { deleteRestaurantController } from "../factories/useCases/deleteRestaurantFactory";
 import { findAllRestaurantsController } from "../factories/useCases/findAllRestaurantsFactory";
 import { findARestaurantController } from "../factories/useCases/findDataRestaurantFactory";
 import { registerRestaurantController } from "../factories/useCases/registerRestaurantFactory";
@@ -27,5 +28,9 @@ restaurantRoute.patch('/restaurant/:id', authMiddleware, updateRestaurantValidat
     async (req: Request, res: Response) => {
         await updateRestaurantController.handle(req, res);
     });
+
+restaurantRoute.delete('/restaurant/:id', authMiddleware, async (req: Request, res: Response) => {
+    await deleteRestaurantController.handle(req, res);
+});
 
 export default restaurantRoute;

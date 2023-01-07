@@ -70,4 +70,8 @@ export class MongooseRestaurantRepository implements IRestaurantRepository {
 
         return updatedRestaurant;
     }
+
+    async deleteRestaurantById(id: string): Promise<void> {
+        await RestaurantMongooseModel.deleteOne({ id });
+    }
 }
