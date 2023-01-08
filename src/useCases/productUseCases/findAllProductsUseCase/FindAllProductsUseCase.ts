@@ -12,13 +12,13 @@ export class FindAllProductsUseCase implements IUseCase {
         const findAllProducts = await this.findAllProductsRepository.findAllProducts();
 
         const mainInformationOfAllProducts = findAllProducts.map(props => (<ICreateProductRequest>{
-            photo_url: props.photo_url ? props.photo_url : null as unknown as string,
+            photo_url: props.photo_url ? props.photo_url : undefined as unknown as string,
             name: props.name,
             price: props.price,
             category: props.category,
-            description_onsale: props.description_onsale ? props.description_onsale : null as unknown as string,
-            new_price_onsale: props.new_price_onsale ? props.new_price_onsale : null as unknown as string,
-            day_and_hour_onsale: props.new_price_onsale ? props.new_price_onsale : null as unknown as string
+            description_onsale: props.description_onsale ? props.description_onsale : undefined as unknown as string,
+            new_price_onsale: props.new_price_onsale ? props.new_price_onsale : undefined as unknown as string,
+            day_and_hour_onsale: props.new_price_onsale ? props.new_price_onsale : undefined as unknown as string
         }));
 
         return mainInformationOfAllProducts;
