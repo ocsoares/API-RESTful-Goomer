@@ -28,6 +28,12 @@ export class MongooseProductRepository implements IProductRepository {
         return findProductByName;
     }
 
+    async findAllProducts(): Promise<IProduct[]> {
+        const findAllProducts = await ProductMongooseModel.find();
+
+        return findAllProducts;
+    }
+
     async createProduct(data: IProduct): Promise<IProduct> {
         const newProduct = new ProductMongooseModel(data);
         await newProduct.save();
