@@ -11,7 +11,8 @@ export class FindAllProductsUseCase implements IUseCase {
     async execute(): Promise<IProduct[]> {
         const findAllProducts = await this.findAllProductsRepository.findAllProducts();
 
-        const mainInformationOfAllProducts = findAllProducts.map(props => (<ICreateProductRequest>{
+        const mainInformationOfAllProducts = findAllProducts.map(props => (<IProduct>{
+            id: props.id,
             photo_url: props.photo_url ? props.photo_url : undefined as unknown as string,
             name: props.name,
             price: props.price,

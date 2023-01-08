@@ -8,7 +8,8 @@ export type BadRequestErrorMessages =
     'Já existe um restaurante registrado com esse nome !' |
     'Restaurante não encontrado !' |
     'Insira algum dado para alterar no restaurante !' |
-    'Já existe um produto registrado com esse nome !';
+    'Já existe um produto registrado com esse nome !' |
+    'Produto não encontrado !';
 
 export type UnauthorizedErrorMessages =
     'Token inválido ou expirado !';
