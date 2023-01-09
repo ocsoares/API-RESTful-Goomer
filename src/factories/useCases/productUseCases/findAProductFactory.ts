@@ -1,5 +1,5 @@
 import { MongooseProductRepository } from "../../../repositories/implementations/mongoose/MongooseProductRepository";
-import { FindAProductController } from "../../../useCases/productUseCases/findAProduct/findAProductController";
+import { FindAProductController } from "../../../useCases/productUseCases/findAProduct/FindAProductController";
 import { FindAProductUseCase } from "../../../useCases/productUseCases/findAProduct/FindAProductUseCase";
 
 const makeFindAProductFactory = (): FindAProductController => {

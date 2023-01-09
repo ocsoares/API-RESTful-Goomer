@@ -9,12 +9,17 @@ export class FindAProductUseCase implements IUseCase {
     ) { }
 
     async execute(id: string): Promise<IProduct> {
-        const findAProductById = await this.findAProductRepository.findProductById(id);
+        try {
+            const findAProductById = await this.findAProductRepository.findProductById(id);
 
-        if (!findAProductById) {
+            if (!findAProductById) {
+                throw new BadRequestAPIError('Produto não encontrado !');
+            }
+
+            return findAProductById;
+        }
+        catch (error: any) {
             throw new BadRequestAPIError('Produto não encontrado !');
         }
-
-        return findAProductById;
     }
 }
