@@ -12,7 +12,6 @@ export class UpdateRestaurantUseCase implements IUseCase {
     async execute(restaurant: IRestaurant): Promise<IRestaurant> {
         try {
             const nameAlreadyExists = await this.changeRestaurantRepository.findByName(restaurant.name);
-            console.log(nameAlreadyExists);
 
             if (nameAlreadyExists) {
                 throw new BadRequestAPIError('Já existe um restaurante registrado com esse nome !');

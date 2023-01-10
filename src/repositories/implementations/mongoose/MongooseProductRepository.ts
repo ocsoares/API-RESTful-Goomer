@@ -40,4 +40,24 @@ export class MongooseProductRepository implements IProductRepository {
 
         return newProduct;
     }
+
+    async updateAProduct(data: IProduct): Promise<IProduct> {
+        const searchAProduct = await ProductMongooseModel.findById(data.id) as IProduct;
+
+        const updateAProduct = await ProductMongooseModel.findByIdAndUpdate(data.id, <Omit<IProduct, 'id'>>{
+            photo_url: data.photo_url ? data.photo_url : searchAProduct.photo_url,
+            name: data.name ? data.name : searchAProduct.name,
+            category: data.category ? data.category : searchAProduct.category,
+            price: data.price ? data.price : searchAProduct.price,
+            description_onsale: data.description_onsale ? data.description_onsale : searchAProduct.description_onsale,
+            new_price_onsale: data.new_price_onsale ? data.new_price_onsale : searchAProduct.new_price_onsale,
+            day_and_hour_onsale: data.day_and_hour_onsale ? data.day_and_hour_onsale : searchAProduct.day_and_hour_onsale
+        }) as IProduct;
+
+        return updateAProduct;
+    }
+
+    async deleteAProduct(id: string): Promise<void> {
+        await ProductMongooseModel.findByIdAndDelete(id);
+    }
 }
