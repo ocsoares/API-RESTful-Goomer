@@ -57,7 +57,7 @@ export class MongooseProductRepository implements IProductRepository {
         return updateAProduct;
     }
 
-    async deleteAProduct(id: string): Promise<void> {
+    async deleteAProductById(id: string): Promise<void> {
         await ProductMongooseModel.findByIdAndDelete(id);
     }
 }
