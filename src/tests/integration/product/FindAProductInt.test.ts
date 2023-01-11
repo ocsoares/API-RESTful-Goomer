@@ -63,11 +63,3 @@ async function findAProductGetRoute(
 
     return getResponse;
 }
-
-async function testeBoy(req: Request, res: Response) {
-
-    const mReq = ({} as unknown) as Request;
-    const mRes = ({ status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown) as Response;
-
-    const testando = await findAProductController.handle(mReq, mRes.send({ a: '' }));
-}
