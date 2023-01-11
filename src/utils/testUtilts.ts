@@ -1,4 +1,5 @@
 import { IProduct } from "../models/IProduct";
+import { IRestaurant } from "../models/IRestaurant";
 import { IUser } from "../models/IUser";
 import { Token } from "./TokenUtils";
 
@@ -16,7 +17,7 @@ export function getTokenWithTestUser() {
 
 export const testProductBodyReturnFunction = (message: string): object => {
     const testProductBodyReturn = {
-        message: message,
+        message,
         product: <IProduct>{
             id: 'any_id',
             photo_url: 'any_photo_url',
@@ -30,4 +31,19 @@ export const testProductBodyReturnFunction = (message: string): object => {
     };
 
     return testProductBodyReturn;
+};
+
+export const testRestaurantBodyReturnFunction = (message: string): object => {
+    const testRestaurantBodyReturn = {
+        message,
+        restaurant: <IRestaurant>{
+            id: 'any_id',
+            photo_url: 'any_photo_url',
+            name: 'any_name',
+            address: 'any_address',
+            business_hours: 'any_business_hours'
+        }
+    };
+
+    return testRestaurantBodyReturn;
 };
