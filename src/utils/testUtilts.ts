@@ -14,8 +14,8 @@ export function getTokenWithTestUser() {
     return generateToken;
 }
 
-export const testBodyReturnFunction = (message: string): object => {
-    const testBodyReturn = {
+export const testProductBodyReturnFunction = (message: string): object => {
+    const testProductBodyReturn = {
         message: message,
         product: <IProduct>{
             id: 'any_id',
@@ -29,5 +29,5 @@ export const testBodyReturnFunction = (message: string): object => {
         }
     };
 
-    return testBodyReturn;
+    return testProductBodyReturn;
 };

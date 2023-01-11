@@ -59,14 +59,15 @@ export class MongooseRestaurantRepository implements IRestaurantRepository {
         business_hours: string,
         photo_url: string
     ): Promise<IRestaurant> {
-        const searchRestaurant = await RestaurantMongooseModel.findById(restaurantId);
+        const searchRestaurant = await RestaurantMongooseModel.findById(restaurantId) as IRestaurant;
+        console.log('searchReID:', searchRestaurant);
 
-        const updatedRestaurant = await searchRestaurant!.updateOne(<IRestaurant>{
-            name: name ? name : searchRestaurant!.name,
-            address: address ? address : searchRestaurant!.address,
-            business_hours: business_hours ? business_hours : searchRestaurant!.business_hours,
-            photo_url: photo_url ? photo_url : searchRestaurant!.photo_url
-        });
+        const updatedRestaurant = await RestaurantMongooseModel.findByIdAndUpdate(restaurantId, <Omit<IRestaurant, 'id'>>{
+            name: name ? name : searchRestaurant.name,
+            address: address ? address : searchRestaurant.address,
+            business_hours: business_hours ? business_hours : searchRestaurant.business_hours,
+            photo_url: photo_url ? photo_url : searchRestaurant.photo_url
+        }) as IRestaurant;
 
         return updatedRestaurant;
     }

@@ -4,12 +4,12 @@ import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../../@ty
 import { app } from '../../../app';
 import { updateAProductController } from '../../../factories/useCases/productUseCases/updateAProductFactory';
 import { IUpdateAProductRequest } from '../../../useCases/productUseCases/updateAProduct/IUpdateAProduct';
-import { getTokenWithTestUser, testBodyReturnFunction } from '../../../utils/testUtilts';
+import { getTokenWithTestUser, testProductBodyReturnFunction } from '../../../utils/testUtilts';
 
 describe('Update a product Integration Test', () => {
     const urlRoute = '/api/product/';
     const TEST_TOKEN = getTokenWithTestUser();
-    const testBodyReturn = testBodyReturnFunction('Produto atualizado !');
+    const testBodyReturn = testProductBodyReturnFunction('Produto atualizado !');
 
     const updateData: IUpdateAProductRequest = {
         photo_url: 'any_photo_url',

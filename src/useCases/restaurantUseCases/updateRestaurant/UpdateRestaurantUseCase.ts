@@ -25,9 +25,18 @@ export class UpdateRestaurantUseCase implements IUseCase {
                 restaurant.photo_url as string
             ) as IRestaurant;
 
-            return updateRestaurant;
+            const mainInformationOfUpdatedRestaurant: IRestaurant = {
+                id: updateRestaurant.id,
+                photo_url: updateRestaurant.photo_url ? updateRestaurant.photo_url : undefined,
+                name: updateRestaurant.name,
+                address: updateRestaurant.address,
+                business_hours: updateRestaurant.business_hours
+            };
+
+            return mainInformationOfUpdatedRestaurant;
         }
         catch (error: any) {
+            console.log(error.message);
             const errorMessage: BadRequestErrorMessages = 'Já existe um restaurante registrado com esse nome !';
 
             if (error.message === errorMessage) {

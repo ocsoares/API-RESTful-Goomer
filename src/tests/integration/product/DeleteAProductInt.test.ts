@@ -3,12 +3,12 @@ import { Request, Response } from 'express';
 import { UnauthorizedErrorMessages } from '../../../@types/errorAPIMessages';
 import { app } from '../../../app';
 import { deleteAProductController } from '../../../factories/useCases/productUseCases/deleteAProductRepository';
-import { getTokenWithTestUser, testBodyReturnFunction } from '../../../utils/testUtilts';
+import { getTokenWithTestUser, testProductBodyReturnFunction } from '../../../utils/testUtilts';
 
 describe('Delete a product Integration Test', () => {
     const urlRoute = '/api/product/';
     const TEST_TOKEN = getTokenWithTestUser();
-    const testBodyReturn = testBodyReturnFunction('Produto deletado com sucesso !');
+    const testBodyReturn = testProductBodyReturnFunction('Produto deletado com sucesso !');
 
     it('Should be possible to delete a product', async () => {
         const mReq = ({
