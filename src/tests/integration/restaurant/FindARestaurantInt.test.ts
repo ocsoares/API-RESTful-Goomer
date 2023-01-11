@@ -1,15 +1,33 @@
 import request from 'supertest';
+import { Request, Response } from 'express';
 import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../../@types/errorAPIMessages';
 import { app } from '../../../app';
-import { getTokenWithTestUser } from '../../../utils/testUtilts';
+import { findARestaurantController } from '../../../factories/useCases/restaurantUseCases/findARestaurantFactory';
+import { getTokenWithTestUser, testRestaurantBodyReturnFunction } from '../../../utils/testUtilts';
 
 describe('Find a restaurant Integration Test', () => {
     const findARestaurantURLRoute = `/api/restaurant/`;
     const TEST_TOKEN = getTokenWithTestUser();
+    const testRestaurantBodyReturn = testRestaurantBodyReturnFunction('Restaurante encontrado !');
 
-    // it('Should be possible to find a restaurant', async () => {
+    it('Should be possible to find a restaurant', async () => {
+        const mReq = ({
+            params: { id: 'any_id_params' },
+            body: {
+                ...testRestaurantBodyReturn
+            }
+        } as unknown) as Request;
 
-    // });
+        const mRes = ({ status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown) as Response;
+
+        try {
+            await findARestaurantController.handle(mReq, mRes);
+        }
+        catch (error: any) {
+            expect(mReq.body.message).toBe('Restaurante encontrado !');
+            expect(mReq.body.restaurant).toHaveProperty('name');
+        }
+    });
 
     it('Should be NOT find a restaurant if id is invalid', async () => {
         const getResponse = await findARestaurantGetRoute(
