@@ -18,7 +18,18 @@ export class UpdateAProductUseCase implements IUseCase {
         try {
             const updateAProduct = await this.updateAProductRepository.updateAProduct(data);
 
-            return updateAProduct;
+            const mainInformationOfUpdatedProduct: IProduct = {
+                photo_url: updateAProduct.photo_url ? updateAProduct.photo_url : undefined,
+                id: updateAProduct.id,
+                name: updateAProduct.name,
+                category: updateAProduct.category,
+                price: updateAProduct.price,
+                day_and_hour_onsale: updateAProduct.day_and_hour_onsale ? updateAProduct.day_and_hour_onsale : undefined as any,
+                description_onsale: updateAProduct.description_onsale ? updateAProduct.description_onsale : undefined as any,
+                new_price_onsale: updateAProduct.new_price_onsale ? updateAProduct.new_price_onsale : undefined as any
+            };
+
+            return mainInformationOfUpdatedProduct;
         }
         catch (error: any) {
             throw new BadRequestAPIError('Produto não encontrado !');
