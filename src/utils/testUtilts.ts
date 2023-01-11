@@ -14,16 +14,20 @@ export function getTokenWithTestUser() {
     return generateToken;
 }
 
-export const testBodyReturn = {
-    message: 'Produto encontrado !',
-    product: <IProduct>{
-        id: 'any_id',
-        photo_url: 'any_photo_url',
-        name: 'any_name',
-        category: 'any_category',
-        price: 120,
-        description_onsale: 'any_description_onsale',
-        day_and_hour_onsale: 'any_day_and_hour_onsale',
-        new_price_onsale: 60
-    }
+export const testBodyReturnFunction = (message: string): object => {
+    const testBodyReturn = {
+        message: message,
+        product: <IProduct>{
+            id: 'any_id',
+            photo_url: 'any_photo_url',
+            name: 'any_name',
+            category: 'any_category',
+            price: 120,
+            description_onsale: 'any_description_onsale',
+            day_and_hour_onsale: 'any_day_and_hour_onsale',
+            new_price_onsale: 60
+        }
+    };
+
+    return testBodyReturn;
 };

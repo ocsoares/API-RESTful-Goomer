@@ -8,7 +8,14 @@ describe('Delete a product Integration Test', () => {
     const TEST_TOKEN = getTokenWithTestUser();
 
     // it('Should be possible to delete a product', async () => {
+    //     const mReq = ({
+    //         params: { id: 'any_id_params' },
+    //         body: {
+    //             ...testBodyReturn
+    //         }
+    //     } as unknown) as Request;
 
+    //     const mRes = ({ status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown) as Response;
     // });
 
     it('Should NOT be possible to delete a product if product id is invalid', async () => {

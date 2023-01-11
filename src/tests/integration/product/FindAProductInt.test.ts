@@ -3,11 +3,12 @@ import request from 'supertest';
 import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../../@types/errorAPIMessages';
 import { app } from '../../../app';
 import { findAProductController } from '../../../factories/useCases/productUseCases/findAProductFactory';
-import { getTokenWithTestUser, testBodyReturn } from '../../../utils/testUtilts';
+import { getTokenWithTestUser, testBodyReturnFunction, } from '../../../utils/testUtilts';
 
 describe('Find a product Integration Test', () => {
     const urlRoute = '/api/product/';
     const TEST_TOKEN = getTokenWithTestUser();
+    const testBodyReturn = testBodyReturnFunction('Produto encontrado !');
 
     it('Should be possible to find a product', async () => {
         const mReq = ({

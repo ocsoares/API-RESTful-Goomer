@@ -19,7 +19,18 @@ export class DeleteAProductUseCase implements IUseCase {
 
             await this.deleteAProductRepository.deleteAProductById(id);
 
-            return findProductToReturn;
+            const mainInformationOfDeletedProduct: IProduct = {
+                photo_url: findProductToReturn.photo_url ? findProductToReturn.photo_url : undefined,
+                id: findProductToReturn.id,
+                name: findProductToReturn.name,
+                category: findProductToReturn.category,
+                price: findProductToReturn.price,
+                day_and_hour_onsale: findProductToReturn.day_and_hour_onsale ? findProductToReturn.day_and_hour_onsale : undefined as any,
+                description_onsale: findProductToReturn.description_onsale ? findProductToReturn.description_onsale : undefined as any,
+                new_price_onsale: findProductToReturn.new_price_onsale ? findProductToReturn.new_price_onsale : undefined as any
+            };
+
+            return mainInformationOfDeletedProduct;
         }
         catch (error: any) {
             throw new BadRequestAPIError('Produto não encontrado !');
