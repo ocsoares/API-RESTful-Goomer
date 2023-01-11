@@ -1,15 +1,32 @@
+import { Request, Response } from 'express';
 import request from 'supertest';
 import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../../@types/errorAPIMessages';
 import { app } from '../../../app';
-import { getTokenWithTestUser } from '../../../utils/testUtilts';
+import { findAProductController } from '../../../factories/useCases/productUseCases/findAProductFactory';
+import { getTokenWithTestUser, testBodyReturn } from '../../../utils/testUtilts';
 
 describe('Find a product Integration Test', () => {
     const urlRoute = '/api/product/';
     const TEST_TOKEN = getTokenWithTestUser();
 
-    // it('Should be possible to find a product', async () => {
+    it('Should be possible to find a product', async () => {
+        const mReq = ({
+            params: { id: 'any_id_params' },
+            body: {
+                ...testBodyReturn
+            }
+        } as unknown) as Request;
 
-    // })
+        const mRes = ({ status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown) as Response;
+
+        try {
+            await findAProductController.handle(mReq, mRes);
+        }
+        catch (error: any) {
+            expect(mReq.body.message).toBe('Produto encontrado !');
+            expect(mReq.body.product).toHaveProperty('id');
+        }
+    });
 
     it('Should NOT be possible to find a product if id is invalid', async () => {
         const getResponse = await findAProductGetRoute(
@@ -45,4 +62,12 @@ async function findAProductGetRoute(
         .set('Authorization', `Bearer ${token}`);
 
     return getResponse;
+}
+
+async function testeBoy(req: Request, res: Response) {
+
+    const mReq = ({} as unknown) as Request;
+    const mRes = ({ status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown) as Response;
+
+    const testando = await findAProductController.handle(mReq, mRes.send({ a: '' }));
 }

@@ -16,7 +16,18 @@ export class FindAProductUseCase implements IUseCase {
                 throw new BadRequestAPIError('Produto não encontrado !');
             }
 
-            return findAProductById;
+            const mainInformationOfProduct: IProduct = {
+                photo_url: findAProductById.photo_url ? findAProductById.photo_url : undefined,
+                id: findAProductById.id,
+                name: findAProductById.name,
+                category: findAProductById.category,
+                price: findAProductById.price,
+                day_and_hour_onsale: findAProductById.day_and_hour_onsale ? findAProductById.day_and_hour_onsale : undefined as any,
+                description_onsale: findAProductById.description_onsale ? findAProductById.description_onsale : undefined as any,
+                new_price_onsale: findAProductById.new_price_onsale ? findAProductById.new_price_onsale : undefined as any
+            };
+
+            return mainInformationOfProduct;
         }
         catch (error: any) {
             throw new BadRequestAPIError('Produto não encontrado !');
