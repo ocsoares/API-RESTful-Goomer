@@ -60,7 +60,6 @@ export class MongooseRestaurantRepository implements IRestaurantRepository {
         photo_url: string
     ): Promise<IRestaurant> {
         const searchRestaurant = await RestaurantMongooseModel.findById(restaurantId) as IRestaurant;
-        console.log('searchReID:', searchRestaurant);
 
         const updatedRestaurant = await RestaurantMongooseModel.findByIdAndUpdate(restaurantId, <Omit<IRestaurant, 'id'>>{
             name: name ? name : searchRestaurant.name,

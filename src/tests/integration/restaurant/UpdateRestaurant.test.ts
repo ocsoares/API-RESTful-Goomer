@@ -1,8 +1,10 @@
 import request from 'supertest';
+import { Request, Response } from 'express';
 import { BadRequestErrorMessages, UnauthorizedErrorMessages } from '../../../@types/errorAPIMessages';
 import { app } from '../../../app';
 import { IUpdateRestaurantRequest } from '../../../useCases/restaurantUseCases/updateRestaurant/IUpdateRestaurant';
-import { getTokenWithTestUser } from '../../../utils/testUtilts';
+import { getTokenWithTestUser, testRestaurantBodyReturnFunction } from '../../../utils/testUtilts';
+import { updateRestaurantController } from '../../../factories/useCases/restaurantUseCases/updateRestaurantFactory';
 
 describe('Update restaurant Integration Test', () => {
     const updateRestaurantURLRoute = '/api/restaurant/invalid_restaurant';
@@ -11,11 +13,27 @@ describe('Update restaurant Integration Test', () => {
     const TEST_ADDRESS = 'any_address';
     const TEST_BUSINESS_HOURS = 'any_business_hours';
     const TEST_ANY_PHOTO_URL = 'any_photo_url';
+    const testRestaurantBodyReturn = testRestaurantBodyReturnFunction('Restaurante atualizado com sucesso !');
 
 
-    // it('Should be possible to update a restaurant', async () => {
+    it('Should be possible to update a restaurant', async () => {
+        const mReq = ({
+            params: { id: 'any_id_params' },
+            body: {
+                ...testRestaurantBodyReturn
+            }
+        } as unknown) as Request;
 
-    // })
+        const mRes = ({ status: jest.fn().mockReturnThis(), json: jest.fn() } as unknown) as Response;
+
+        try {
+            await updateRestaurantController.handle(mReq, mRes);
+        }
+        catch (error: any) {
+            expect(mReq.body.message).toBe('Restaurante atualizado com sucesso !');
+            expect(mReq.body.restaurant).toHaveProperty('id');
+        }
+    });
 
     it('Should NOT be possible to update a restaurant if invalid restaurant', async () => {
         const getResponse = await updateRestaurantPostRoute(
